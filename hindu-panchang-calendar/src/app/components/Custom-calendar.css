@@ -1,0 +1,67 @@
+/* Custom styles for vertical day headers */
+/* Restructure the calendar layout */
+.fc .fc-scrollgrid-section-header.fc-scrollgrid-section-sticky > * {
+  position: relative; /* Override the sticky positioning */
+  z-index: 1;
+}
+
+/* Main container layout modifications */
+.fc .fc-scrollgrid {
+  display: flex !important;
+  flex-direction: row;
+  width: auto !important;
+}
+
+/* Header/weekday column */
+.fc .fc-scrollgrid-section-header {
+  width: 50px;
+  position: relative !important;
+  z-index: 1;
+}
+
+.fc .fc-scrollgrid-section-header table {
+  height: 100%;
+}
+
+.fc .fc-scrollgrid-section-header th {
+  height: auto !important;
+}
+
+/* Rotate the day headers vertically */
+.vertical-day-headers {
+  writing-mode: vertical-lr;
+  transform: rotate(180deg);
+  height: 100px !important;
+  width: 40px !important;
+  padding: 10px 0 !important;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Main content area */
+.fc .fc-scrollgrid-section-body {
+  flex: 1;
+}
+
+/* Make day cells larger */
+.fc-daygrid-day {
+  min-height: 100px;
+}
+
+/* Remove borders between header and body sections */
+.fc .fc-scrollgrid-section-header,
+.fc .fc-scrollgrid-section-body {
+  border-right: 1px solid #ddd;
+}
+
+/* Fix for container height */
+.fc-view-harness {
+  height: 100% !important;
+}
+
+/* Add hover effect to day cells */
+.fc .fc-daygrid-day:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
