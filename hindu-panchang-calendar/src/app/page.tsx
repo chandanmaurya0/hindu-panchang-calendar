@@ -28,7 +28,7 @@ export default function Home() {
   return (
     <>
       <Header />
-      <div className="flex flex-col md:flex-row w-full">
+      <div className="flex flex-col md:flex-row w-full ">
         <div className="w-full md:w-1/3 md:pr-4">
           <DateDetails date={selectedDate} data={panchangData} />
           <PoojaVratDetails items={panchangData?.poojaVratList || []} />

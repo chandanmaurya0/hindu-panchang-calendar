@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import Header from '@/app/components/Header';
+import Image from 'next/image';
 
 // This would come from an API in a real application
 interface PoojaDetails {
@@ -71,11 +72,15 @@ export default function PoojaDetailsPage() {
       <div className="container mx-auto px-4 py-8">
         <div className="bg-white shadow-lg rounded-lg overflow-hidden">
           {poojaDetails.image && (
-            <img 
-              src={poojaDetails.image} 
-              alt={poojaDetails.title}
-              className="w-full h-64 object-cover"
-            />
+            <div className="relative h-64 w-full">
+              <Image 
+                src={poojaDetails.image} 
+                alt={poojaDetails.title}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              />
+            </div>
           )}
           <div className="p-6">
             <h1 className="text-3xl font-bold text-orange-600 mb-4">{poojaDetails.title}</h1>

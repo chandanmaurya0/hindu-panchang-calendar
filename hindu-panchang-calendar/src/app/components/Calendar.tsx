@@ -155,7 +155,7 @@ const Calendar: React.FC<CalendarProps> = ({
   };
 
   return (
-    <div className="calendar-container h-[600px] flex flex-col">
+    <div className="calendar-container  flex flex-col">
       {/* Add location input and date picker */}
       <div className="px-4 py-2 flex flex-wrap items-center gap-4 border-b border-gray-200">
         <input

@@ -17,7 +17,7 @@ const convertUtcOffsetToTimezone = (utcOffset: string): number => {
   return sign * (hours + minutes / 60);
 };
 
-const fetchDailyPanchangDetail = async (selectedDate: string ) => {
+const fetchDailyPanchangDetail = async (selectedDate: string) => {
   try {
     // extract day, month and year from selected date
     const date = dayjs(selectedDate);
@@ -54,7 +54,6 @@ const fetchDailyPanchangDetail = async (selectedDate: string ) => {
       region: location?.country || "India",
     };
 
-
     const response = await axios.post(
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/v1/panchang/basic-panchang-details`,
       requestData
@@ -64,7 +63,13 @@ const fetchDailyPanchangDetail = async (selectedDate: string ) => {
 
     // Mock pooja and vrat data if not provided by the API
     if (data.data && !data.data.poojaVratList) {
-      data.data.poojaVratList = generatePoojaVratData();
+      data.data.poojaVratList = await generatePoojaVratData(
+        day,
+        month,
+        year,
+        location?.city,
+        location?.region
+      );
     }
 
     return data;
@@ -75,23 +80,32 @@ const fetchDailyPanchangDetail = async (selectedDate: string ) => {
 };
 
 // Helper function to generate mock data until API provides it
-function generatePoojaVratData() {
-  // This is a placeholder - in production, this data would come from your API
-  return [
-    {
-      "type": "POOJA",
-      "title": "Satyanarayan Pooja",
-      "description": "For prosperity and well-being",
-      "page_url": "/pooja/satyanarayan"
-    },
-    {
-      "type": "VRAT",
-      "title": "Ekadashi Vrat",
-      "description": "Dedicated to Lord Vishnu",
-      "page_url": "/vrat/ekadashi"
-    },
-    // Add more items as needed
-  ];
+async function generatePoojaVratData(
+  day: number,
+  month: number,
+  year: number,
+  city: string,
+  region: string
+) {
+  try {
+    const reqBody = {
+      day,
+      month,
+      year,
+      city,
+      region,
+    };
+
+    const response = await axios.post(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/v1/panchang/pooja-vrat-details`,
+      reqBody
+    );
+
+    return response.data?.data;
+  } catch (error) {
+    console.error("Error fetching Pooja Vrat data", error);
+    return null;
+  }
 }
 
 const fetchMonthlyPanchangDetail = async (selectedDate: string) => {
