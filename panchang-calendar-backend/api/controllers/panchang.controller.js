@@ -122,6 +122,15 @@ const get_monthly_panchang_details = async (req, res) => {
           region: req.body.region,
         }).select("sunrise sunset tithi nakshatra");
 
+
+        // remove seconds from sunrise and sunset time
+        if (dbData && dbData.sunrise) {
+          dbData.sunrise = dbData.sunrise.slice(0, -3);
+        }
+        if (dbData && dbData.sunset) {
+          dbData.sunset = dbData.sunset.slice(0, -3);
+        }
+
         return {
           date: date,
           day: parseInt(date.split("-")[0]), // Extract day number for easier matching
