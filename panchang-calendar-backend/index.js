@@ -4,7 +4,7 @@ const cors = require("cors");
 const app = express();
 
 
-const port = 4000;
+const port = 8080;
 
 // import dotenv
 require("dotenv").config();
