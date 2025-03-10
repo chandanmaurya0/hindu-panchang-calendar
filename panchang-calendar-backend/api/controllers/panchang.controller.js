@@ -174,34 +174,60 @@ const get_pooja_vrat_details = async (req, res) => {
     let day = req.body.day.toString().padStart(2, "0");
     let month = req.body.month.toString().padStart(2, "0");
     let year = req.body.year.toString();
-    let panchang_d_m_y = `${day}-${month}-${year}`;
 
     let sample_data = [
       {
         type: "POOJA",
-        title: "Pooja 1",
-        description: "Description 1",
-        page_url: "/pooja-1",
+        title: "Satnarayan Pooja",
+        description: "For prosperity and well-being",
+        page_url: "/satnarayan-pooja",
       },
       {
         type: "POOJA",
-        title: "Pooja 2",
-        description: "Description 2",
-        page_url: "/pooja-2",
+        title: "Vinayak Chaturthi Pooja",
+        description: "For removing obstacles",
+        page_url: "/vinayak-chaturthi-pooja",
+      },
+      {
+        type: "POOJA",
+        title: "Ram Navami Pooja",
+        description: "For Lord Ram's blessings",
+        page_url: "/ram-navami-pooja",
       },
       {
         type: "VRAT",
-        title: "Vrat 1",
-        description: "Description 1",
-        page_url: "/vrat-1",
+        title: "Ekadashi Vrat",
+        description: "Dedicated to Lord Vishnu",
+        page_url: "/ekadashi-vrat",
       },
       {
         type: "VRAT",
-        title: "Vrat 2",
-        description: "Description 2",
-        page_url: "/vrat-2",
+        title: "Amavasya Vrat",
+        description: "For peace and prosperity",
+        page_url: "/amavasya-vrat",
       },
+      {
+        type: "VRAT",
+        title: "Purnima Vrat",
+        description: "For blessings of Lord Satyanarayan",
+        page_url: "/purnima-vrat",
+      },
+      {
+        type: "POOJA",
+        title: "Ganesh Chaturthi Pooja",
+        description: "For Lord Ganesha's blessings",
+        page_url: "/ganesh-chaturthi-pooja",
+      },
+      {
+        type: "POOJA",
+        title: "Krishna Janmashtami Pooja",
+        description: "For Lord Krishna's blessings",
+        page_url: "/krishna-janmashtami-pooja",
+      }
     ];
+
+    // in response, pick 2 poojas and 2 vrats randomly
+    sample_data = sample_data.sort(() => 0.5 - Math.random()).slice(0, 4);
 
     return res.status(200).json({
       message: "Pooja and vrat details fetched successfully",
